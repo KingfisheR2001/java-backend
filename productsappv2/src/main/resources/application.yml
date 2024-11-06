@@ -16,5 +16,5 @@ springdoc:
   api-docs:
     path: /api-docs
   swagger-ui:
-    try-it-out-enabled: false
+    try-it-out-enabled: true
     default-model-expand-depth: -1

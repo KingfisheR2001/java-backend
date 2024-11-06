@@ -6,6 +6,10 @@ import com.cloudthat.productsappv2.model.ProductModel;
 import com.cloudthat.productsappv2.model.ProductRequest;
 import com.cloudthat.productsappv2.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -66,12 +70,21 @@ public class ProductServiceImpl implements ProductService{
         return productToProductModel(productRepository.findByProductName(productName));
     }
 
+    @Override
+    public Page<ProductModel> getProducts(int page, int size, String sort, String direction) {
+        Sort sort1 = Sort.by(Sort.Direction.fromString(direction), sort);
+        Pageable pageable = PageRequest.of(page,size, sort1);
+        Page<Product> products = productRepository.findAll(pageable);
+
+        return products.map(this::productToProductModel);
+    }
+
     private Product productModelToProduct(ProductModel productModel){
         Product product = new Product();
         product.setId(productModel.getId());
         product.setProductName(productModel.getProductName());
         product.setCategory(productModel.getCategory());
-        product.setPrice(product.getPrice());
+        product.setPrice(productModel.getPrice());
         return  product;
     }
 
