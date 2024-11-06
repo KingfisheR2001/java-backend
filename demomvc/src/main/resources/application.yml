@@ -1,0 +1,6 @@
+user: "Sarthak"
+spring:
+  application:
+    name: demomvc
+server:
+  port: 8082
