@@ -14,6 +14,9 @@ public class ApiResponse {
     public ApiResponse() {
     }
 
+    public ApiResponse(String s, boolean b) {
+    }
+
     public boolean isSuccess() {
         return success;
     }
