@@ -58,10 +58,10 @@ public class ProductsController {
 
     @GetMapping("/products/pages")
     public ResponseEntity<ApiResponse> getProducts(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "5") int size,
-            @RequestParam(defaultValue = "productName") String sort,
-            @RequestParam(defaultValue = "asc") String direction
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size,
+        @RequestParam(defaultValue = "productName") String sort,
+        @RequestParam(defaultValue = "asc") String direction
     ){
         Page<ProductModel> products = productService.getProducts(page, size, sort, direction);
         return new ResponseEntity<ApiResponse>(new ApiResponse(true,"Products Fetch Successful", products ), HttpStatus.OK );

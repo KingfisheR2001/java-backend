@@ -1,13 +1,9 @@
 package com.cloudthat.productsappv2.exceptions;
 
-public class ResourceNotFoundException extends RuntimeException {
-
+public class ResourceNotFoundException extends RuntimeException{
     private String resourceName;
     private String fieldName;
     private Long fieldValue;
-
-    public ResourceNotFoundException(String product, String id, Long productId) {
-    }
 
     public String getResourceName() {
         return resourceName;
@@ -33,14 +29,15 @@ public class ResourceNotFoundException extends RuntimeException {
         this.fieldValue = fieldValue;
     }
 
-    public ResourceNotFoundException(String message, String resourceName, String fieldName, Long fieldValue) {
-        super(String.format("%s not found with %s : %s", resourceName, fieldName, fieldValue));
+    public ResourceNotFoundException(String resourceName, String fieldName, Long fieldValue) {
+        super(String.format("%s not found with %s: %s", resourceName,fieldName, fieldValue));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;
     }
-    public ResourceNotFoundException(String message, String resourceName, String fieldName, String fieldValue2) {
-        super(String.format("%s not found with %s : %s", resourceName, fieldName, fieldValue2));
+
+    public ResourceNotFoundException(String resourceName, String fieldName, String fieldValue2) {
+        super(String.format("%s not found with %s: %s", resourceName,fieldName, fieldValue2));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
     }

@@ -8,20 +8,61 @@ import java.util.Date;
 public class ErrorResponse {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-
     private Date timestamp;
+
     private int code;
+
     private String status;
+
     private String message;
+
     private String stackTrace;
+
     private Object data;
+
     private Boolean success = false;
 
-    public ErrorResponse(HttpStatus httpStatus, String message) {
+    public ErrorResponse() {
+        timestamp = new Date();
+    }
+
+    public ErrorResponse(
+            HttpStatus httpStatus,
+            String message
+    ) {
+        this();
 
         this.code = httpStatus.value();
         this.status = httpStatus.name();
         this.message = message;
+    }
+
+    public ErrorResponse(
+            HttpStatus httpStatus,
+            String message,
+            String stackTrace
+    ) {
+        this(
+                httpStatus,
+                message
+        );
+
+        this.stackTrace = stackTrace;
+    }
+
+    public ErrorResponse(
+            HttpStatus httpStatus,
+            String message,
+            String stackTrace,
+            Object data
+    ) {
+        this(
+                httpStatus,
+                message,
+                stackTrace
+        );
+
+        this.data = data;
     }
 
     public Date getTimestamp() {
@@ -78,23 +119,5 @@ public class ErrorResponse {
 
     public void setSuccess(Boolean success) {
         this.success = success;
-    }
-
-    public ErrorResponse(String status, String message) {
-        this.status = status;
-        this.message = message;
-    }
-
-    public ErrorResponse(String status, String message, String stackTrace) {
-        this.status = status;
-        this.message = message;
-        this.stackTrace = stackTrace;
-    }
-
-    public ErrorResponse(String status, String message, String stackTrace, Object data) {
-        this.status = status;
-        this.message = message;
-        this.stackTrace = stackTrace;
-        this.data = data;
     }
 }
