@@ -1,13 +1,12 @@
 package com.cloudthat.productsappv2.controller;
 
 
-import com.cloudthat.productsappv2.entity.Product;
+
 import com.cloudthat.productsappv2.model.ApiResponse;
 import com.cloudthat.productsappv2.model.ProductModel;
 import com.cloudthat.productsappv2.model.ProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +21,7 @@ public class ProductsController {
     @PostMapping("/products")
     public ResponseEntity<ApiResponse> createProduct(@RequestBody ProductRequest productRequest){
         ProductModel productModel = productService.saveProduct(productRequest);
-        return new ResponseEntity<ApiResponse>(new ApiResponse(true,"Product Created Successfully", productModel ), HttpStatus.OK );
+        return new ResponseEntity<ApiResponse>(new ApiResponse(true,"Product Created Successfully", productModel ), HttpStatus.CREATED );
     }
 
     @GetMapping("/products")
@@ -59,10 +58,10 @@ public class ProductsController {
 
     @GetMapping("/products/pages")
     public ResponseEntity<ApiResponse> getProducts(
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "5") int size,
-        @RequestParam(defaultValue = "productName") String sort,
-        @RequestParam(defaultValue = "asc") String direction
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "productName") String sort,
+            @RequestParam(defaultValue = "asc") String direction
     ){
         Page<ProductModel> products = productService.getProducts(page, size, sort, direction);
         return new ResponseEntity<ApiResponse>(new ApiResponse(true,"Products Fetch Successful", products ), HttpStatus.OK );

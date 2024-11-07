@@ -2,6 +2,7 @@ package com.cloudthat.productsappv2.service;
 
 
 import com.cloudthat.productsappv2.entity.Product;
+import com.cloudthat.productsappv2.exceptions.ResourceNotFoundException;
 import com.cloudthat.productsappv2.model.ProductModel;
 import com.cloudthat.productsappv2.model.ProductRequest;
 import com.cloudthat.productsappv2.repository.ProductRepository;
@@ -47,7 +48,9 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public ProductModel getProduct(Long productId) {
-        return productToProductModel(productRepository.findById(productId).get());
+        return productRepository.findById(productId)
+                .map(this::productToProductModel)
+                .orElseThrow(()-> new ResourceNotFoundException("Product","id",productId));
     }
 
     @Override
