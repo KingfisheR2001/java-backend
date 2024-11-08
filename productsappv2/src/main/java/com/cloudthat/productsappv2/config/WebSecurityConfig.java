@@ -40,6 +40,7 @@ public class WebSecurityConfig {
             "/api-docs",
             "/api-docs/**",
             "/swagger-ui/**",
+            "/actuator/**"
     };
 
 

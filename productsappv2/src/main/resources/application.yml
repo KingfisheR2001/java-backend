@@ -18,3 +18,10 @@ springdoc:
   swagger-ui:
     try-it-out-enabled: true
     default-model-expand-depth: -1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'prometheus'
+
